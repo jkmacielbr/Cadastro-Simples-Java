@@ -95,8 +95,8 @@ public class ProgramaPrincipal {
 		System.out.println("Telefone");
 		telefoneCliente = teclado.nextLine();
 //		Cliente nomeC = dados.pesquisaCliente(nomeCliente, cpfCliente);
-		Cliente rg = dados.pesquisaCliente(nomeCliente, rgCliente, cpfCliente);
-		Cliente cpf = dados.pesquisaCliente(nomeCliente, rgCliente, cpfCliente);
+		Cliente rg = dados.pesquisaCliente(rgCliente, cpfCliente);
+		Cliente cpf = dados.pesquisaCliente(rgCliente, cpfCliente);
 		if (rg == null && cpf == null) {
 
 			Cliente cliente = new Cliente(nomeCliente, rgCliente, cpfCliente, emailCliente, telefoneCliente);
@@ -121,15 +121,16 @@ public class ProgramaPrincipal {
 	public static void menuAlterarDados(Dados dados) {
 		teclado = new Scanner(System.in);
 		dados.listarCliente();
-		System.out.println("Nome do usuário");
-		String usuario = teclado.nextLine();
-		Cliente c = dados.pesquisaCliente(usuario);
+		System.out.println("Digite o RG OU CPF");
+		String cpfouRg = teclado.nextLine();
+		Cliente c = dados.pesquisaCliente(cpfouRg, cpfouRg);
 		if (c != null) {
 			System.out.println("\t SELECIONE UMA OPÇÃO");
 			System.out.println("[1] - Nome");
-			System.out.println("[2] - CPF");
-			System.out.println("[3] - E-mail");
-			System.out.println("[4] - Telefone");
+			System.out.println("[2] - RG");
+			System.out.println("[3] - CPF");
+			System.out.println("[4] - E-mail");
+			System.out.println("[5] - Telefone");
 			System.out.println("[0] - Sair");
 
 			int op = teclado.nextInt();
@@ -143,25 +144,28 @@ public class ProgramaPrincipal {
 				break;
 			case 2:
 				teclado.nextLine();
+				System.out.println("RG Novo:");
+				String rgNovo = teclado.nextLine();
+				c.setRg(rgNovo);
+				break;
+				
+			case 3:
+				teclado.nextLine();
 				System.out.println("Cpf Novo:");
 				String cpfNovo = teclado.nextLine();
 				c.setCpf(cpfNovo);
 				break;
-			case 3:
+			case 4:
 				teclado.nextLine();
 				System.out.println("E-mail Novo:");
 				String emailNovo = teclado.nextLine();
 				c.setEmail(emailNovo);
 				break;
-			case 4:
+			case 5:
 				teclado.nextLine();
 				System.out.println("Telefone Novo:");
 				String telefoneNovo = teclado.nextLine();
 				c.setTelefone(telefoneNovo);
-				break;
-			case 5:
-				teclado.nextLine();
-
 				break;
 
 			}

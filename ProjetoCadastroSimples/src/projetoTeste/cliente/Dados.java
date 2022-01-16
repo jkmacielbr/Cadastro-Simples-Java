@@ -35,7 +35,7 @@ public class Dados {
 		return null;
 	}
 
-	public Cliente pesquisaCliente(String buscaCliente, String buscaRg, String buscaCpf) {
+	public Cliente pesquisaCliente(String buscaRg, String buscaCpf) {
 		for (Cliente c : listaClientes) {
 			if ( c.getRg().equals(buscaRg) || c.getCpf().equals(buscaCpf)){
 			
