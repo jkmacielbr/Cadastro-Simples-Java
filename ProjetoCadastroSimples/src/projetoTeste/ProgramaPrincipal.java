@@ -80,32 +80,74 @@ public class ProgramaPrincipal {
 		String telefoneCliente;
 
 		teclado.nextLine();
-		System.out.println("Nome");
+		System.out.println("Informe um Nome");
 		nomeCliente = teclado.nextLine();
 		
-		System.out.println("RG");
+		System.out.println("Informe um RG");
 		rgCliente = teclado.nextLine();
 
-		System.out.println("CPF");
+		System.out.println("Informe o CPF");
 		cpfCliente = teclado.nextLine();
 
-		System.out.println("E-mail");
+		System.out.println("Informe um E-mail");
 		emailCliente = teclado.nextLine();
 
 		System.out.println("Telefone");
 		telefoneCliente = teclado.nextLine();
-//		Cliente nomeC = dados.pesquisaCliente(nomeCliente, cpfCliente);
-		Cliente rg = dados.pesquisaCliente(rgCliente, cpfCliente);
-		Cliente cpf = dados.pesquisaCliente(rgCliente, cpfCliente);
-		if (rg == null && cpf == null) {
+		
+		if(dados.limitarString(cpfCliente) != null) {
+		
+		String d1, d2, d3, d4, d5, d6, d7, d8, d9 , confere = "";
+		int n1, n2 , n3 , n4, n5 , n6, n7, n8, n9, verificador1, verificador2;
+		d1 = (String) cpfCliente.subSequence(0, 1); n1 = Integer.parseInt(d1);
+		d2 = (String) cpfCliente.subSequence(1, 2); n2 = Integer.parseInt(d2);
+		d3 = (String) cpfCliente.subSequence(2, 3); n3 = Integer.parseInt(d3);
+		d4 = (String) cpfCliente.subSequence(4, 5); n4 = Integer.parseInt(d4);
+		d5 = (String) cpfCliente.subSequence(5, 6); n5 = Integer.parseInt(d5);
+		d6 = (String) cpfCliente.subSequence(6, 7); n6 = Integer.parseInt(d6);
+		d7 = (String) cpfCliente.subSequence(8, 9); n7 = Integer.parseInt(d7);
+		d8 = (String) cpfCliente.subSequence(9, 10); n8 = Integer.parseInt(d8);
+		d9 = (String) cpfCliente.subSequence(10, 11); n9 = Integer.parseInt(d9);
+		
+	
+		verificador1 = (n1 * 10+ n2 * 9 + n3 * 8 + n4 *7 + n5 * 6 + n6 * 5 + n7 * 4 + n8 * 3 + n9 * 2);
+		
+		if (verificador1 % 11 < 2) {
+			verificador1 = 0;
+		} else {
+			verificador1= 11 - (verificador1 % 11);
+		}
+		
+			verificador2 = (n1 * 11 + n2 * 10 + n3 * 9 + n4 * 8 + n5 * 7 + n6 * 6 + n7 * 5 + n8 * 4 + n9 * 3 + verificador1 * 2);
+			if (verificador2 % 11 < 2) {
+				verificador2 = 0;
+			} else {
+				verificador2 = 11 - (verificador2 % 11);
+			}
+			
+		
+//			confere = d1 + d2 + d3 + d4 + d5 + d6 + d7 + d8 + d9 + verificador1 + verificador2;
+			confere = d1 + d2 + d3 + "." + d4 + d5 + d6 + "." + d7 + d8 + d9 + "-" + verificador1 + verificador2;
+			
+			
+			
+			if (confere.equals(cpfCliente)) {
+				
+								
+				Cliente rg = dados.pesquisaCliente(rgCliente, cpfCliente);
+				Cliente cpf = dados.pesquisaCliente(rgCliente, cpfCliente);
+				if (rg == null && cpf == null) {
 
-			Cliente cliente = new Cliente(nomeCliente, rgCliente, cpfCliente, emailCliente, telefoneCliente);
+					Cliente cliente = new Cliente(nomeCliente, rgCliente, cpfCliente, emailCliente, telefoneCliente);
 
-			dados.cadastrarCliente(cliente);
-			System.out.println("\tCADASTRADO COM SUCESSO\n");
+					dados.cadastrarCliente(cliente);
+					System.out.println("\tCADASTRADO COM SUCESSO\n");
 
-		} else
-			System.out.println("Falha -> Usuário já cadastrado para outro usuário");
+				} else
+					System.out.println("Falha -> Usuário já cadastrado para outro usuário");
+			}
+			}else System.out.println("CPF Inválido");
+		
 
 	}
 

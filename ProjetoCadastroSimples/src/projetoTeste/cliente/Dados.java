@@ -7,6 +7,7 @@ public class Dados {
 	ArrayList<Cliente> listaClientes = new ArrayList<>();
 
 	public void cadastrarCliente(Cliente cliente) {
+		
 		listaClientes.add(cliente);
 
 	}
@@ -43,6 +44,15 @@ public class Dados {
 			}
 		}
 		return null;
+	}
+	
+	public String limitarString(String cpf) {
+		
+		if (cpf.length() == 14) {
+			return cpf;
+		}else 
+		return null;
+		
 	}
 	
 
